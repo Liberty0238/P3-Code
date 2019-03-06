@@ -1,0 +1,105 @@
+#include <kipr/botball.h>
+
+int main()
+{
+    //drive forward
+    clear_motor_position_counter(0);
+    while (get_motor_position_counter(0) < 1000)
+    {
+        motor(0, 50);
+        motor(3, 50);
+    }
+    // turning out of the starting box
+    clear_motor_position_counter(0);
+    while (get_motor_position_counter(0) < 1700)
+    {
+        motor(0, 50);
+        motor(3, 00);
+    }
+    // driveing to the fire station
+    clear_motor_position_counter(0);
+    while (get_motor_position_counter(0) < 3500)
+    {
+        motor(0, 50);
+        motor(3, 50);
+    }
+    
+    // turning right
+    
+    clear_motor_position_counter(3);
+    while (get_motor_position_counter(3) < 1700)
+    {
+        motor(0, 00);
+        motor(3, 50);
+    }
+    
+   // driveing to the water
+     clear_motor_position_counter(0);
+    while (get_motor_position_counter(0) < 4400)
+    {
+        motor(0, 50);
+        motor(3, 50);
+    }
+       // turning right
+    clear_motor_position_counter(3);
+    while (get_motor_position_counter(3) < 1800)
+    {
+        motor(0, 00);
+        motor(3, 50);
+    }
+      //backing into  mc
+        clear_motor_position_counter(3);
+    while (get_motor_position_counter(3) < -1800)
+    {
+        motor(0, -20);
+        motor(3, -20);
+    }
+
+    //lowering claw 
+    enable_servos();
+    set_servo_position(0,2047);
+    msleep(100);
+    //open claw
+    set_servo_position(3,907);
+    msleep(100);
+
+    //flowing the blue
+      clear_motor_position_counter(0); 
+    clear_motor_position_counter(3);
+    while(get_motor_position_counter(3) < 6800)
+    {
+        if(analog(1) < 2500)
+        {
+            motor(0,30);
+            motor(3,15);
+        }
+        else
+        {
+            motor(0,15);
+            motor(3,30);
+        }
+    }
+    //turning Right on the blue line
+    clear_motor_position_counter(3);
+    while (get_motor_position_counter(3) < 1000)
+    {
+        motor(0, 00);
+        motor(3, 30);
+    }
+    clear_motor_position_counter(0); 
+    clear_motor_position_counter(3);
+    while(get_motor_position_counter(3) < 5000)
+    {
+        if(analog(1) < 2500)
+        {
+            motor(0,30);
+            motor(3,15);
+        }
+        else
+        {
+            motor(0,15);
+            motor(3,30);
+        }
+    }
+    return 0;
+}
